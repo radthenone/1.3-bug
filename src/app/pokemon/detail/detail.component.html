@@ -1,1 +1,76 @@
-<p>detail works!</p>
+<div class="card" style="width: 24rem;">
+    <div *ngIf="pokemonDetails; else loading">
+        <img class="card-img-top" src="{{pokemonImage}}" alt="Card image cap">
+        <div class="card-header text-center">
+            Pokédex no:{{ pokemonId }}
+        </div>
+        <p class="card-title text-center">{{ pokemonName }}</p>
+        <div class="text-center">
+            <div class="card-text">Experience:{{ pokemonDetails.base_experience }}</div>
+            <div class="card-text">Height:{{ pokemonDetails.height }}</div>
+            <div class="card-text">Default:{{ pokemonDetails.is_default ? 'Yes' : 'No' }}</div>
+            <div class="card-text">Weight:{{ pokemonDetails.weight }}</div>
+        </div>
+        <div class="card-body card-item">
+            <p class="card-text text-center">Abilities</p>
+            <ul *ngFor="let abilityList of pokemonDetails.abilities" class="list-group list-group-flush">
+                <li class="list-group-item">
+                    {{ abilityList.ability.name }} ({{ abilityList.is_hidden ? 'Hidden' : 'Visible' }})
+                </li>
+            </ul>
+        </div>
+        <div class="card-body card-item">
+            <p class="card-text text-center">Types</p>
+            <p class="card-solo">
+                {{ getTypeNames() }}
+            </p>
+        </div>
+        <div class="card-body card-item">
+            <p class="card-text text-center">Stats</p>
+            <ul *ngFor="let statsList of pokemonDetails.stats" class="list-group list-group-flush">
+                <li class="list-group-item">
+                    {{ statsList.stat.name }}: {{ statsList.base_stat }}
+                </li>
+            </ul>
+        </div>
+        <div class="card-body card-item">
+            <p class="card-text text-center">Cries</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-center">
+                    <button class="btn btn-primary" (click)="PlayCries(pokemonDetails.cries.latest)"> Play latest
+                    </button>
+                    <button class="btn btn-secondary" (click)="PlayCries(pokemonDetails.cries.legacy)"> Play legacy
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body card-item">
+            <p class="card-text text-center">Game Versions</p>
+            <p class="card-solo">
+                {{ getGameIndicesVersionNameList() }}
+            </p>
+        </div>
+        <div class="card-body card-item">
+            <p class="card-text text-center">Generations</p>
+            <div class="row">
+                <div class="col-6 col-md-4" *ngFor="let version of getVersionsWithImages()">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <strong>{{ version.name }}</strong>
+                            <img [src]="version.image" alt="{{ version.name }}" class="img-fluid"
+                                 style="height: auto;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <ng-template #loading>
+        <div class="card-body text-center">
+            <div class="card-text text-center">Pokemon don't exists please return to list</div>
+            <br>
+            <button class="btn btn-warning" routerLink="/pokemon">Return to pokemons</button>
+        </div>
+    </ng-template>
+</div>

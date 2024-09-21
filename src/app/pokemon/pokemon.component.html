@@ -6,7 +6,8 @@
                     <div class="list-group-item" *ngFor="let pokemon of pokemons; let i = index">
                         <p>{{ pokemon.name }}</p>
                         <img [src]="getImageUrl(pokemon.id)" alt="{{ pokemon.name }}"
-                             routerLink="/pokemon/{{ pokemon.id }}">
+                             routerLink="/pokemon/{{ pokemon.id }}"
+                             [state]="{pokemonName: pokemon.name, pokemonImage: getImageUrl(pokemon.id)}">
                     </div>
                 </div>
             </div>

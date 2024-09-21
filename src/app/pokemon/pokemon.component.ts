@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from './pokemon.service';
-import { last } from 'rxjs';
+import { PokemonData } from './pokemon.interface';
 
 @Component({
   selector: 'app-pokemon',
@@ -29,7 +29,7 @@ export class PokemonComponent implements OnInit {
   fetchPokemons(url?: string): void {
     this.pokemonService.getPokemons(url).subscribe({
       next: (data) => {
-        this.pokemons = data.results.map((pokemon: any) => {
+        this.pokemons = data.results.map((pokemon: PokemonData) => {
           pokemon.id = this.extractIdFromUrl(pokemon.url);
           return pokemon;
         });
@@ -62,6 +62,6 @@ export class PokemonComponent implements OnInit {
   }
 
   getImageUrl(pokemonId: number): string {
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
+    return this.pokemonService.getPokemonImage(pokemonId);
   }
 }
