@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="col-md-12">
+        <div class="pokemon-list">
+            <div class="pokemon-element" *ngIf="pokemons && pokemons.length > 0; else noPokemons">
+                <div class="list-group">
+                    <div class="list-group-item" *ngFor="let pokemon of pokemons; let i = index">
+                        <p>{{ pokemon.name }}</p>
+                        <img [src]="getImageUrl(pokemon.id)" alt="{{ pokemon.name }}"
+                             routerLink="/pokemon/{{ pokemon.id }}">
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #noPokemons>
+                <p>No pokemons</p>
+            </ng-template>
+        </div>
+
+        <div class="pagination-controls">
+            <button class="btn btn-success" (click)="loadPreviousPage()" [disabled]="!previous">Previous</button>
+            <span>Page {{ currentPage }} of {{ getTotalPages() }}</span>
+            <button class="btn btn-success" (click)="loadNextPage()" [disabled]="!next">Next</button>
+        </div>
+
+        <div class="col-md-6">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

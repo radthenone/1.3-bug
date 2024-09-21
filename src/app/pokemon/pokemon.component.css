@@ -1,0 +1,47 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    width: 100%;
+}
+
+.container {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.pokemon-list {
+    height: 100%;
+}
+
+.list-group {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.list-group-item {
+    border: darkslategray 1px solid;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: cornsilk;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.pagination-controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    width: 100%;
+}
